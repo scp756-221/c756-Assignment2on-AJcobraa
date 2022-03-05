@@ -167,7 +167,7 @@ def write_orig_artist(music_id):
     response = requests.put(
         url,
         params=payload,
-        json={"orig_artist": OrigArtist},
+        json={"OrigArtist": OrigArtist},
         headers={'Authorization': headers['Authorization']})
     return (response.json())
 

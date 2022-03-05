@@ -37,7 +37,7 @@ class Music():
             The artist performing song.
         song: string
             The name of the song.
-        orig_artist: string or None
+        OrigArtist: string or None
             The name of the original performer of this song.
 
         Returns
@@ -65,7 +65,7 @@ class Music():
         m_id: string
             The UUID of this song in the music database.
 
-        orig_artist: string
+        OrigArtist: string
             The original artist performing the song.
 
         Returns
@@ -75,7 +75,7 @@ class Music():
         """
         r = requests.put(
             self._url + 'write_orig_artist/' + m_id,
-            json={'orig_artist': OrigArtist},
+            json={'OrigArtist': OrigArtist},
             headers={'Authorization': self._auth}
         )
         return r.status_code
@@ -90,7 +90,7 @@ class Music():
 
         Returns
         -------
-        status, artist, title, orig_artist
+        status, artist, title, OrigArtist
 
         status: number
             The HTTP status code returned by Music.
@@ -98,7 +98,7 @@ class Music():
           If status is not 200, None.
         title: If status is 200, the title of the song.
           If status is not 200, None.
-        orig_artist: If status is 200 and the song has an
+        OrigArtist: If status is 200 and the song has an
           original artist field, the artist's name.
           If the status is not 200 or there is no original artist
           field, None.
@@ -125,11 +125,11 @@ class Music():
 
         Returns
         -------
-        status, orig_artist
+        status, OrigArtist
 
         status: number
             The HTTP status code returned by Music.
-        orig_artist:
+        OrigArtist:
           If status is 200, the original artist who
             performed the song.
           If status is not 200, None.
@@ -141,7 +141,7 @@ class Music():
         if r.status_code != 200:
             return r.status_code, None
         item = r.json()
-        return r.status_code, item['orig_artist']
+        return r.status_code, item['OrigArtist']
 
     def delete(self, m_id):
         """Delete an artist, song pair.

@@ -28,7 +28,7 @@ class Music():
         self._url = url
         self._auth = auth
 
-    def create(self, artist, song, orig_artist=None):
+    def create(self, artist, song, OrigArtist=None):
         """Create an artist, song pair.
 
         Parameters
@@ -48,8 +48,8 @@ class Music():
         """
         payload = {'Artist': artist,
                    'SongTitle': song}
-        if orig_artist is not None:
-            payload['OrigArtist'] = orig_artist
+        if OrigArtist is not None:
+            payload['OrigArtist'] = OrigArtist
         r = requests.post(
             self._url,
             json=payload,
@@ -57,7 +57,7 @@ class Music():
         )
         return r.status_code, r.json()['music_id']
 
-    def write_orig_artist(self, m_id, orig_artist):
+    def write_orig_artist(self, m_id, OrigArtist):
         """Write the original artist performing a song.
 
         Parameters
@@ -75,7 +75,7 @@ class Music():
         """
         r = requests.put(
             self._url + 'write_orig_artist/' + m_id,
-            json={'orig_artist': orig_artist},
+            json={'orig_artist': OrigArtist},
             headers={'Authorization': self._auth}
         )
         return r.status_code
